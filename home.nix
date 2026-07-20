@@ -42,18 +42,43 @@ in
 
   programs.starship = {
     enable = true;
+
     settings = {
       add_newline = false;
+
+      palette = "longhorn";
+
+      palettes.longhorn = {
+        burnt_orange = "#BF5700";
+        bright_orange = "#FF8A00";
+        cream = "#F8E7D0";
+        tan = "#D6B48C";
+        error_red = "#FF6B6B";
+      };
+
       format = "$directory$git_branch$git_status$cmd_duration$line_break$character";
+
       directory = {
-        style = "bold #BF5700";
+        style = "bold burnt_orange";
+      };
+
+      git_branch = {
+        style = "bold cream";
+      };
+
+      git_status = {
+        style = "bold bright_orange";
+      };
+
+      cmd_duration = {
+        style = "tan";
+        format = "[$duration]($style) ";
       };
 
       character = {
-        success_symbol = "[❯](purple)";
-        error_symbol = "[❯](red)";
+        success_symbol = "[❯](bold bright_orange)";
+        error_symbol = "[❯](bold error_red)";
       };
-      cmd_duration.format = "[$duration]($style) ";
     };
   };
 
@@ -62,4 +87,9 @@ in
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/wezterm";
   home.file.".config/nvim".source=
     config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/nvim";
+  home.file.".config/herdr".source=
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.config/herdr";
+  home.file.".claude/settings.json".source=
+    config.lib.file.mkOutOfStoreSymlink "${dotfiles}/home/.claude/settings.json";
 }
+
